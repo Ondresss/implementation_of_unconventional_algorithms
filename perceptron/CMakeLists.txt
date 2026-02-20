@@ -3,6 +3,7 @@ project(perceptron)
 
 set(CMAKE_CXX_STANDARD 26)
 
+find_package(Matplot++ REQUIRED)
 add_executable(perceptron main.cpp
         Perceptron.cpp
         Perceptron.h
@@ -14,3 +15,9 @@ add_executable(perceptron main.cpp
         Signum.cpp
         Signum.h
         PointSet.h)
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+
+target_link_libraries(perceptron PRIVATE
+        Matplot++::matplot
+)
