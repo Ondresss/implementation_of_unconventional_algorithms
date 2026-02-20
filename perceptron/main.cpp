@@ -15,6 +15,8 @@ int main(void) {
         Perceptron perceptron(trainingSet,signumF);
         perceptron.train();
         perceptron.predict(testingSet);
+        perceptron.setSeparationFunction([](double x){ return 3 * x + 2; });
+        perceptron.visualize();
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
         std::exit(EXIT_FAILURE);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.20)
 project(perceptron)
 
 set(CMAKE_CXX_STANDARD 26)
@@ -17,7 +17,8 @@ add_executable(perceptron main.cpp
         PointSet.h)
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
-
+target_compile_options(perceptron PRIVATE -fsanitize=address -fsanitize=undefined)
+target_link_options(perceptron PRIVATE -fsanitize=address -fsanitize=undefined)
 target_link_libraries(perceptron PRIVATE
         Matplot++::matplot
 )
