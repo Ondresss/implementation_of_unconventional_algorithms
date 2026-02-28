@@ -14,7 +14,8 @@ add_executable(perceptron main.cpp
         IFunction.h
         Signum.cpp
         Signum.h
-        PointSet.h)
+        PointSet.h
+        PointLoader.cpp)
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 target_compile_options(perceptron PRIVATE -fsanitize=address -fsanitize=undefined)
