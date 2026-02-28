@@ -4,6 +4,9 @@
 #pragma once
 #include <vector>
 struct Point {
+    explicit Point(const std::vector<double>& input){
+        this->coordinates = input;
+    }
     std::vector<double> coordinates;
-    int belongs = -1;
+    int correctOutput = -1;
 };

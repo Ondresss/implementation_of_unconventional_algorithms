@@ -8,11 +8,13 @@ add_executable(perceptron main.cpp
         Perceptron.cpp
         Perceptron.h
         Point.h
-        PointLoader.cpp
-        PointLoader.h
         IFunction.h
         Signum.cpp
         Signum.h
+        NeuralNetwork.cpp
+        NeuralNetwork.h
+        Sigmoid.cpp
+        Sigmoid.h
 )
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)

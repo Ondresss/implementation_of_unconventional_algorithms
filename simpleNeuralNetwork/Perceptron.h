@@ -3,25 +3,27 @@
 //
 #pragma once
 #include <memory>
+#include <random>
 #include <vector>
 
-#include "IVisualizable.h"
 #include "Point.h"
 #include "IFunction.h"
-#include "PointSet.h"
 #include <matplot/matplot.h>
-class Perceptron final : public IVisualizable {
+class Perceptron final {
 public:
-    explicit Perceptron(std::shared_ptr<PointSet> pointSet_,std::shared_ptr<IFunction> f_) : pointSet(pointSet_),f(f_) {};
-    void visualize() override;
-    void train();
-    void predict(std::shared_ptr<PointSet> pointSet_);
-    void setSeparationFunction(std::function<double(double)> func) { this->separationFunction = func; };
+    explicit Perceptron(std::shared_ptr<IFunction> f_) : f(std::move(f_)),rng(std::random_device {}()) {};
+    double run(Point& p) const;
+    [[nodiscard]] double getLastSum() const { return this->lastSum; };
+    void recalculateWeights(double delta,const std::vector<double>& inputs);
+    [[nodiscard]] const std::vector<double>& getWeights() const { return this->weights; };
+    [[nodiscard]] double getLastSumDerivative() const {return this->f->derivative(this->lastSum);};
+    void generateRandomParameters(int dim);
 private:
-    std::shared_ptr<PointSet> pointSet = nullptr;
-    std::shared_ptr<PointSet> predictedSet = nullptr;
     std::shared_ptr<IFunction> f;
+    std::vector<double> weights;
+    double offset = -1;
+    std::mt19937 rng;
+    double lastSum = -1;
 
-    std::function<double(double)> separationFunction = nullptr;
 };
 

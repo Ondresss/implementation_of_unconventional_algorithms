@@ -9,6 +9,7 @@ public:
     virtual ~IFunction() = default;
     explicit IFunction(std::string name_) : name(std::move(name_)) {}
     virtual double evaluate(double x) = 0;
+    virtual double derivative(double x) { return 0;};
 protected:
     std::string name;
 };
