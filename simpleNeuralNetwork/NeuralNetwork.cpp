@@ -6,12 +6,15 @@
 
 void NeuralNetwork::init() {
     if (this->inputLayer.empty()) throw std::invalid_argument("input layer is empty");
-    for (auto& perceptron : this->hiddenLayer) {
-        perceptron->generateRandomParameters(static_cast<int>(this->inputLayer.at(0).coordinates.size()));
-    }
-    this->outputPerceptron->generateRandomParameters(static_cast<int>(this->inputLayer.at(0).coordinates.size()));
-}
 
+    int inputDim = static_cast<int>(this->inputLayer.at(0).coordinates.size());
+    for (auto& perceptron : this->hiddenLayer) {
+        perceptron->generateRandomParameters(inputDim);
+    }
+
+    int hiddenDim = static_cast<int>(this->hiddenLayer.size());
+    this->outputPerceptron->generateRandomParameters(hiddenDim);
+}
 void NeuralNetwork::train(int maxIter) {
     double totalError = 1.0;
     int iteration = 0;

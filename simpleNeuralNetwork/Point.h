@@ -4,6 +4,10 @@
 #pragma once
 #include <vector>
 struct Point {
+    Point(const std::vector<double>& input,int correctOutput){
+        this->correctOutput = correctOutput;
+        this->coordinates = input;
+    }
     explicit Point(const std::vector<double>& input){
         this->coordinates = input;
     }

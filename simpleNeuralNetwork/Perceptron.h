@@ -12,7 +12,7 @@
 class Perceptron final {
 public:
     explicit Perceptron(std::shared_ptr<IFunction> f_) : f(std::move(f_)),rng(std::random_device {}()) {};
-    double run(Point& p) const;
+    double run(Point& p);
     [[nodiscard]] double getLastSum() const { return this->lastSum; };
     void recalculateWeights(double delta,const std::vector<double>& inputs);
     [[nodiscard]] const std::vector<double>& getWeights() const { return this->weights; };

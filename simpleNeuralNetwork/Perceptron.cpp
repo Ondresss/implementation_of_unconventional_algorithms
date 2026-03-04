@@ -5,12 +5,15 @@
 #include "Perceptron.h"
 
 
-double Perceptron::run(Point& p) const {
+double Perceptron::run(Point& p) {
     double sum = 0.0;
-    for (int i  = 0; i < p.coordinates.size(); i++) {
+    for (int i = 0; i < p.coordinates.size(); i++) {
         sum += p.coordinates.at(i) * this->weights.at(i);
     }
     sum += this->offset;
+
+    this->lastSum = sum;
+
     return this->f->evaluate(sum);
 }
 
