@@ -17,6 +17,7 @@ public:
     void recalculateWeights(double delta,const std::vector<double>& inputs);
     [[nodiscard]] const std::vector<double>& getWeights() const { return this->weights; };
     [[nodiscard]] double getLastSumDerivative() const {return this->f->derivative(this->lastSum);};
+    [[nodiscard]] double getBias() const { return this->offset; };
     void generateRandomParameters(int dim);
 private:
     std::shared_ptr<IFunction> f;

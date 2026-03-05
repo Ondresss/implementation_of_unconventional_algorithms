@@ -17,18 +17,20 @@ int main() {
         };
 
         std::vector<std::shared_ptr<Perceptron>> hiddenLayer;
-        for(int i = 0; i < 3; ++i) {
+        for(int i = 0; i < 2; ++i) {
             hiddenLayer.push_back(std::make_shared<Perceptron>(sigmoid));
         }
         auto outputNeuron = std::make_shared<Perceptron>(sigmoid);
         NeuralNetwork nn(trainingData, hiddenLayer, outputNeuron);
+        std::cout << "---------------------------- Before learning phase ----------------------------\n"  << std::endl;
         nn.init();
-        std::cout << "Trénuji..." << std::endl;
+        std::cout << "-------------------------------------------------------------------------------\n"  << std::endl;
+        std::cout << "---------------------------- After learning phase -----------------------------\n"  << std::endl;
         nn.train(100000);
-
-        std::cout << "\nVýsledky testu:" << std::endl;
+        std::cout << "-------------------------------------------------------------------------------\n"  << std::endl;
+        std::cout << "---------------------------- After testing phase-------------------------------\n" << std::endl;
         nn.test(trainingData);
-
+        std::cout << "-------------------------------------------------------------------------------\n"  << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Chyba: " << e.what() << std::endl;
         return 1;

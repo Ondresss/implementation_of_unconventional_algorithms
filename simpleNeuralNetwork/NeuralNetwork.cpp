@@ -14,6 +14,9 @@ void NeuralNetwork::init() {
 
     int hiddenDim = static_cast<int>(this->hiddenLayer.size());
     this->outputPerceptron->generateRandomParameters(hiddenDim);
+
+    std::cout << *this << std::endl;
+
 }
 void NeuralNetwork::train(int maxIter) {
     double totalError = 1.0;
@@ -39,9 +42,10 @@ void NeuralNetwork::train(int maxIter) {
             ++iteration;
         }
     }
+    std::cout << *this << std::endl;
 }
 void NeuralNetwork::test(std::vector<Point>& input) const {
-    std::cout << "--- NEURAL NETWORK ---" << std::endl;
+    std::cout <<  "Point\t" << "Guess\t" << "Expected output\t" <<  "Is it equal?" << std::endl;
     for (auto& point : input) {
         std::vector<double> hiddenOutputs;
         for (auto& perceptron : this->hiddenLayer) {
@@ -49,8 +53,12 @@ void NeuralNetwork::test(std::vector<Point>& input) const {
         }
         Point hiddenPoint(hiddenOutputs);
         double result = this->outputPerceptron->run(hiddenPoint);
-        std::cout << "Vstup: " << point.coordinates[0] << ", " << point.coordinates[1]
-                  << " | Cíl: " << point.correctOutput
-                  << " | AI: " << result << std::endl;
+        std::string res;
+        if (point.correctOutput == 1) {
+            res = result > 0.94 ? "true" : "false";
+        } else{
+            res = result < 0.1 ? "true" : "false";
+        }
+        std::cout << point.coordinates[0] << "," << point.coordinates[1] << "\t\t" << result << "\t\t" << point.correctOutput <<  "\t\t\t" << res << std::endl;
     }
 }
