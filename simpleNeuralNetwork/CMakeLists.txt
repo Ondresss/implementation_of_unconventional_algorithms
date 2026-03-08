@@ -15,6 +15,7 @@ add_executable(perceptron main.cpp
         NeuralNetwork.h
         Sigmoid.cpp
         Sigmoid.h
+        ../HopfieldNetwork/main.cpp
 )
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
