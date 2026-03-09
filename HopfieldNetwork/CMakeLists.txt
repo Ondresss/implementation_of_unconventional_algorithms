@@ -10,6 +10,13 @@ add_executable(HopfieldNetwork main.cpp
         Picture.cpp
         Picture.h
         Matrix.h
+        IFunction.h
+        Signum.cpp
+        Signum.h
+        IDrawable.h
+        Menu.cpp
+        Menu.h
+        gui_impl.cpp
 )
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)

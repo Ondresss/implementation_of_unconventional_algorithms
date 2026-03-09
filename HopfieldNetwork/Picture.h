@@ -5,7 +5,8 @@
 #pragma once
 #include <vector>
 #include <cstdint>
-class Picture {
+#include "IDrawable.h"
+class Picture : public IDrawable {
 public:
     explicit Picture(const std::vector<std::vector<int8_t>>& data_) {
         for (auto& vec : data_) {
@@ -17,9 +18,20 @@ public:
     }
     [[nodiscard]] std::size_t numOfPixels() const {return this->data.size();}
 
+    bool operator==(Picture& p) const {
+        for (int i = 0 ; i < this->data.size(); ++i) {
+            if (this->data.at(i) != p(i)) {
+                return false;
+            }
+            return true;
+        }
+    }
+
     int8_t& operator()(std::size_t index) {
         return this->data.at(index);
     }
+
+    void draw(const Rectangle& rec) override;
 private:
     std::vector<int8_t> data;
 };

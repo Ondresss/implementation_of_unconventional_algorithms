@@ -7,12 +7,18 @@
 
 #include "Picture.h"
 #include "Matrix.h"
+#include "IFunction.h"
+#include <random>
 class HopfieldNetwork {
 public:
-    explicit HopfieldNetwork(std::vector<Picture> patterns) : patterns(std::move(patterns)) {} ;
+    HopfieldNetwork(std::vector<Picture> patterns,std::shared_ptr<IFunction> f)
+    : patterns(std::move(patterns)), activationFunction(f) {} ;
     void train();
+    void recover(Picture& pic,int maxIter);
+    double calculateEnergy(Picture& pic);
 private:
     std::vector<Picture> patterns;
-    std::shared_ptr<Matrix<int32_t>> W = nullptr;
+    std::shared_ptr<HopField::Matrix<int32_t>> W = nullptr;
+    std::shared_ptr<IFunction> activationFunction = nullptr;
 };
 
