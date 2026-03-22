@@ -49,6 +49,8 @@ bool QLearningVisualizer::visualizePathStop() {
 void QLearningVisualizer::visualize(const Rectangle& rec) {
     this->agent->nextStep();
     this->currentIteration++;
+    std::string iterationStr = "iteration: " + std::to_string(this->currentIteration);
+    DrawText(iterationStr.c_str(),rec.x - rec.width * 0.35,rec.y + rec.height * 0.8,32,BLACK);
     this->agent->draw(rec);
 }
 

@@ -48,7 +48,7 @@
 
         auto agent = std::make_shared<Agent>(0.8, R,targetPos);
 
-        std::shared_ptr<QLearningVisualizer> visualizer = std::make_shared<QLearningVisualizer>(agent, 5000);
+        std::shared_ptr<QLearningVisualizer> visualizer = std::make_shared<QLearningVisualizer>(agent, 1500);
 
         auto menu = std::make_shared<Menu>(visualizer);
 
