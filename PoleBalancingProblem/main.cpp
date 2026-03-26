@@ -15,10 +15,10 @@ int main() {
     params.noStates = std::pow(params.bins, 4);
 
     params.limits = {
-            {-2.4, 2.4},
-            {-3.0, 3.0},
-            {-0.21, 0.21},
-            {-4.0, 4.0}
+                {-2.4, 2.4},
+                {-3.0, 3.0},
+                {-0.21, 0.21},
+                {-4.0, 4.0}
     };
 
     auto agent = std::make_shared<Agent>(0.99, env, params);

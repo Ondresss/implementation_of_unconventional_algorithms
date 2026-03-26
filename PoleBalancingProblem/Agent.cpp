@@ -62,39 +62,29 @@ void Agent::trainFromSupervisor(int numSamples) {
     std::uniform_real_distribution<double> distVelo(-1.0, 1.0);
     std::uniform_real_distribution<double> distAngle(-0.15, 0.15);
     std::uniform_real_distribution<double> distOmega(-1.0, 1.0);
-
-    int count0 = 0;
-    int count1 = 0;
-
-    std::cout << "Generating Symetric data for neural network..." << std::endl;
-
     for (int i = 0; i < numSamples; ++i) {
         arma::vec s = { distPos(rng), distVelo(rng), distAngle(rng), distOmega(rng) };
 
         bool mirror = (i % 2 == 1);
-        if (mirror) {
-            s = -s;
-        }
+        if (mirror) s = -s;
+
+        arma::vec s_norm = s;
+        s_norm[0] /= 2.4; s_norm[1] /= 3.0; s_norm[2] /= 0.21; s_norm[3] /= 4.0;
 
         int stateIdx = Discretizer::getDiscreteState(params.limits, s, params.bins);
+
         double bestAction = (Q->at(stateIdx, 0) >= Q->at(stateIdx, 1)) ? 0.0 : 1.0;
 
         if (mirror) {
             bestAction = (bestAction == 0.0) ? 1.0 : 0.0;
         }
 
-        if (bestAction == 0.0) count0++; else count1++;
-
-        states.col(i) = s;
+        states.col(i) = s_norm;
         targets.col(i) = bestAction;
     }
 
-    std::cout << "DEBUG: Division of actions: 0: " << count0 << ", 1: " << count1 << std::endl;
-
-    std::cout << "Training neural network (100 epoch)..." << std::endl;
-    for (int epoch = 1; epoch <= 100; ++epoch) {
+    for (int epoch = 1; epoch <= 200; ++epoch) {
+        std::cout << "Epoch: " << epoch << std::endl;
         brain.Train(states, targets);
-        if (epoch % 10 == 0) std::cout << "Epoch " << epoch << "/100..." << std::endl;
     }
-    std::cout << "Done!" << std::endl;
 }
