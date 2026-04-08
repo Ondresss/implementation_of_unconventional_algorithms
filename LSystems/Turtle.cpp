@@ -1,7 +1,8 @@
 #include "Turtle.h"
 
 void Turtle::draw() {
-    DrawLineV(lastPos, pos, BLACK);
+    float lineThickness = 2.5f;
+    DrawLineEx(lastPos, pos, lineThickness, BLACK);
 
     float size = 3.0f;
     Vector2 v1 = { pos.x + std::cos(angle) * size, pos.y + std::sin(angle) * size };

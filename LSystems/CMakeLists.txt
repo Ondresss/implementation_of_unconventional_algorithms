@@ -13,6 +13,9 @@ add_executable(LSystems main.cpp
         Turtle.h
         Menu.cpp
         Menu.h
+        ../IFS/main.cpp
+        ../IFS/IFS.cpp
+        ../IFS/IFS.h
 )
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)

@@ -20,7 +20,7 @@ void LSystem::run(int noIter) {
     }
 }
 void LSystem::draw() {
-    turtle->setState({(float)GetScreenWidth()/2, (float)GetScreenHeight() - 50}, -PI/2.0f);
+    turtle->setState({static_cast<float>(GetScreenWidth() * 0.6), (float)GetScreenHeight() - 50}, -PI/2.0f);
 
     for (char c : text) {
         if (c == 'F') {
