@@ -12,6 +12,6 @@ public:
         Vector2 end{};
     };
     FractalTerrain() = default;
-    void draw(const Line& line,int depth,int amplitude);
+    void draw(const Line& line,int depth,float amplitude,Color color);
 };
 

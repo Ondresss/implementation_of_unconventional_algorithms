@@ -5,9 +5,28 @@
 #include "Menu.h"
 
 void Menu::draw() {
-    if (GuiButton({ 40, 350, 260, 40 }, "DRAW")) {
-        float startX = GetScreenWidth() * 0.2;
-        float startY = GetScreenHeight() * 0.5;
-        this->terrain.draw(FractalTerrain::Line{Vector2{startX,startY},Vector2{startX + 200,startY}},10,5);
+    if (GuiButton({ 40, (float)GetScreenHeight() - 60, 200, 40 }, "GENERATE TERRAIN")) {
+        this->showTerrain = true;
+        this->currentSeed = GetRandomValue(0,23456);
+    }
+    if (showTerrain) {
+        SetRandomSeed(this->currentSeed);
+        float floorY = GetScreenHeight() * 0.7f;
+        this->terrain.draw(FractalTerrain::Line{
+          {0, floorY-150}, {static_cast<float>(GetScreenWidth()), floorY-150}},
+          5, 250.0f,WHITE);
+        this->terrain.draw(FractalTerrain::Line{
+            {0, floorY-100}, {static_cast<float>(GetScreenWidth()), floorY-100}},
+            10, 120.0f,BROWN);
+        this->terrain.draw(FractalTerrain::Line{
+            {0, floorY-60}, {static_cast<float>(GetScreenWidth()), floorY-60}},
+            10, 80.0f,DARKGREEN);
+        this->terrain.draw(FractalTerrain::Line{
+           {0, floorY+150}, {static_cast<float>(GetScreenWidth()), floorY+150}},
+           8, 10.0f,GREEN);
+
+
+
+
     }
 }

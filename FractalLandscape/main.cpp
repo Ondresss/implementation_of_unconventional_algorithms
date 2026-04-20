@@ -4,21 +4,16 @@
 #include "Menu.h"
 int main(void) {
 
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1280;
+    const int screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Raylib - Fractal Landscape");
 
     SetTargetFPS(60);
-
     Menu menu{};
+    Color myLightBlue = { 190, 230, 255, 255 };
     while (!WindowShouldClose()) {
-
         BeginDrawing();
-        ClearBackground(BLACK);
-
-        DrawText("Stiskni R pro novy teren", 10, 10, 20, GRAY);
-
-
+        ClearBackground(myLightBlue);
         menu.draw();
 
         EndDrawing();

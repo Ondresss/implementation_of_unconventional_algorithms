@@ -17,13 +17,14 @@ void PoleBalancingProblem::run(int noIterations) {
 void PoleBalancingProblem::draw(const Rectangle& rec) {
     static int frameCounter = 0;
     this->currentScore++;
-    arma::vec s_norm = currentS.Data();
-    s_norm[0] /= 2.4;
-    s_norm[1] /= 3.0;
-    s_norm[2] /= 0.21;
-    s_norm[3] /= 4.0;
+    arma::mat s_norm_mat(4, 1);
+    s_norm_mat(0, 0) = currentS.Data()[0] / 2.4;
+    s_norm_mat(1, 0) = currentS.Data()[1] / 3.0;
+    s_norm_mat(2, 0) = currentS.Data()[2] / 0.21;
+    s_norm_mat(3, 0) = currentS.Data()[3] / 4.0;
+
     arma::mat prediction;
-    agent->getBrain().Predict(s_norm, prediction);
+    agent->getBrain().Predict(s_norm_mat, prediction);
 
     float confidence = static_cast<float>(prediction(0, 0));
     int actionIdx = (confidence > 0.5) ? 1 : 0;
