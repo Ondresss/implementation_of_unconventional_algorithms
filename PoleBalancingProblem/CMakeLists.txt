@@ -11,7 +11,8 @@ add_executable(PoleBalancingProblem main.cpp
         Agent.cpp
         Agent.h
         PoleBalancingProblem.cpp
-        PoleBalancingProblem.h)
+        PoleBalancingProblem.h
+        ../FractalLandscape/main.cpp)
 
 target_include_directories(PoleBalancingProblem PRIVATE
         /usr/local/include
